@@ -8,6 +8,7 @@ from .models import  Like
 from .models import Comment
 from .models import Post
 from .serializers import CommentSerializer
+from .serializers import LikeSerializer
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -28,69 +29,14 @@ class PostView(APIView):
 
 
 
-class AddLike(LoginRequiredMixin, View):
-
-    def post(self, request, pk, *args, **kwargs):
-        post = Like.objects.get(pk=pk)
-
-        is_dislike = False
-
-        for dislike in post.dislikes.all():
-            if dislike == request.user:
-                is_dislike = True
-                break
-
-
-        if is_dislike:
-            post.dislikes.remove(request.user)
-
-        is_like = False
-
-        for like in post.likes.all():
-            if like == request.user:
-                is_like = True
-                break
-
-        if not is_like:
-            post.likes.add(request.user)
-
-        if is_like:
-            post.likes.remove(request.user)
-
-        return HttpResponseRedirect(reverse('like', args=[str(pk)]))
+class LikeView(APIView):
+    def get (self,request, *arqs , **kwargs):
+        queryset=Like.objects.all()
+        serializer=LikeSerializer(queryset,many=True)
+        return Response.serializer.data
 
 
 
-class AddDislike(LoginRequiredMixin, View):
 
-    def post(self, request, pk, *args, **kwargs):
-        post = Like.objects.get(pk=pk)
-
-        is_like = False
-
-        for like in post.likes.all():
-            if like == request.user:
-                is_like = True
-                break
-
-        if is_like:
-            post.likes.remove(request.user)
-
-
-
-        is_dislike = False
-
-        for dislike in post.dislikes.all():
-            if dislike == request.user:
-                is_dislike = True
-                break
-
-        if not is_dislike:
-            post.dislikes.add(request.user)
-
-        if is_dislike:
-            post.dislikes.remove(request.user)
-
-        return HttpResponseRedirect(reverse('like', args=[str(pk)]))
 
 # Create your views here.
