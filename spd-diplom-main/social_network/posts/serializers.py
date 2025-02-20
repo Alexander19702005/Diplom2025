@@ -4,7 +4,10 @@ from .models import Post
 from .models import Post_1
 from .models import Like
 from .models import Message
+<<<<<<< HEAD
 from django.db.models import Count,Max,Min,Avg
+=======
+>>>>>>> ea163d5ff6bbce2a44a8e5f39315c7e6db34870b
 #Сериализатор для лайков
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,6 +31,7 @@ class PostSerializer(serializers.ModelSerializer):
  #  Сериализатор    для    комментариев
 
 class Post_1Serializer(serializers.ModelSerializer):
+<<<<<<< HEAD
     comments = PostSerializer(many=False, read_only=True, source='image')
     likes_count = serializers.SerializerMethodField()
 
@@ -41,6 +45,22 @@ class Post_1Serializer(serializers.ModelSerializer):
         fields =['id','text_1','user','created_at','image','comments','likes_count']
     #def likes_count(self,likes):
         #return likes.like.aggregate(Count('like'))
+=======
+<<<<<<< HEAD
+    comments = PostSerializer(many=False, read_only=True, source='image')
+    likes = LikeSerializer(many=False,read_only=True,source='post')
+    class Meta:
+        model = Post_1
+        fields =['id','text_1','user','created_at','image','comments','likes']
+=======
+    comments = PostSerializer(many=False, read_only=True, source='text')
+    likes = LikeSerializer(many=True, read_only=True, source='post')
+    class Meta:
+        model = Post_1
+        fields = '__all__'
+>>>>>>> 8cb5cc2cdf2597ff25cebd0b87951eaf9e4d0cc9
+
+>>>>>>> ea163d5ff6bbce2a44a8e5f39315c7e6db34870b
 
 
     #def create(self, validated_data):

@@ -24,7 +24,10 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
+<<<<<<< HEAD
 from django.db.models import Count,Max,Min,Avg
+=======
+>>>>>>> ea163d5ff6bbce2a44a8e5f39315c7e6db34870b
 
 
 @api_view(["GET","POST"],)
@@ -57,10 +60,13 @@ class Post_1View(APIView):
         queryset=Post_1.objects.all()
         serializer=Post_1Serializer(queryset,many=True)
         return Response(serializer.data)
+<<<<<<< HEAD
     def Likes(request):
         likes=Like.object.aggregate(Count('like'))
         return Response
 
+=======
+>>>>>>> ea163d5ff6bbce2a44a8e5f39315c7e6db34870b
 
 
 # Create your views here.

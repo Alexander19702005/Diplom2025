@@ -3,7 +3,10 @@ from django.contrib.auth import get_user_model
 from django.db.models import ForeignKey
 from django.utils import timezone
 from datetime import datetime
+<<<<<<< HEAD
 from django.db.models import Count,Max,Min,Avg
+=======
+>>>>>>> ea163d5ff6bbce2a44a8e5f39315c7e6db34870b
 
 from numpy.f2py.crackfortran import sourcecodeform
 from psycopg2.errorcodes import NULL_VALUE_NOT_ALLOWED
@@ -43,7 +46,10 @@ class Like(models.Model):
       like = models.CharField(max_length=4,default='like')
       user = models.ForeignKey(User, on_delete=models.CASCADE)
       post = models.ForeignKey(Post, on_delete=models.CASCADE)
+<<<<<<< HEAD
       #likes_count = like.objects.filter.count(like)
+=======
+>>>>>>> ea163d5ff6bbce2a44a8e5f39315c7e6db34870b
 
 
       def __str__(self):
